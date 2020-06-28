@@ -48,6 +48,15 @@ $border: #dcd9d9;
 $heading: #374054;
 $text: #74808a;
 
+// Define margins
+$experience-margin-start: 23px;
+
+// Define z-index
+$z-index-background: -1;
+$z-index-start: 1;
+$z-index-name: $z-index-start + 1;
+$z-index-nav-bar: $z-index-start + 2;
+
 /*
     ---------------------
     ----- 2. Mixins -----
@@ -90,10 +99,14 @@ body {
 
     &.active {
         overflow: hidden;
-        z-index: -1;
+        z-index: $z-index-background;
     }
 }
-
+.fixedNavBar {
+  position: fixed;
+  top: 0px;
+  transform: translate(-50%)
+}
 // No JS styles
 .no-js {
     #experience-timeline {
@@ -146,11 +159,11 @@ header {
     left: 0;
     right: 0;
     text-align: center;
-    z-index: 10;
+    z-index: $z-index-nav-bar;
     animation-name: dropHeader;
     animation-iteration-count: 1;
     animation-timing-function: ease;
-    animation-duration: 0.75s;
+    animation-duration: 1s;
 
     ul {
         display: inline-block;
@@ -358,7 +371,7 @@ footer {
 
 #lead-content {
     position: absolute;
-    z-index: 10;
+    z-index: $z-index-start;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -372,7 +385,6 @@ footer {
         color: #fff;
         font-weight: 900;
         font-size: 5em;
-        text-transform: uppercase;
         letter-spacing: 0.05em;
         line-height: 0.9em;
     }
@@ -394,7 +406,7 @@ footer {
     bottom: 0;
     left: 0;
     background: rgba($base-color-hover, 0.8);
-    z-index: 1;
+    z-index: 0;
 }
 
 #lead-down {
@@ -485,7 +497,7 @@ footer {
         content: '';
         top: 0;
         bottom: 0;
-        left: 303px;
+        left: $experience-margin-start;
         right: auto;
         height: 100%;
         width: 3px;
@@ -501,12 +513,12 @@ footer {
         background: $base-color;
         background: linear-gradient(to bottom, $base-color, rgba($base-color, 0));
         top: 100%;
-        left: 303px;
+        left: $experience-margin-start;
     }
 }
-
 .vtimeline-content {
-    margin-left: 350px;
+    max-width: 700px;
+    margin: 0 auto 30px auto;
     background: #fff;
     border: 1px solid #e6e6e6;
     padding: 15px;
@@ -514,10 +526,12 @@ footer {
     text-align: left;
 
     h3 {
+        position: relative;
         font-size: 1.5em;
         font-weight: 300;
         color: $heading;
         display: inline-block;
+        padding-top: 15px;
         margin: 0;
     }
 
@@ -551,7 +565,6 @@ footer {
     border-radius: 50%;
     float: left;
     z-index: 99;
-    margin-left: 280px;
 
     i {
         display: block;
@@ -564,8 +577,7 @@ footer {
     width: 260px;
     text-align: right;
     position: absolute;
-    left: 0;
-    top: 10px;
+    padding-top: 10px;
     font-weight: 300;
     color: #374054;
 }
@@ -652,6 +664,7 @@ footer {
 
 .project-image {
     float: left;
+    padding-left: 0px;
 }
 
 .project-info {
@@ -666,12 +679,17 @@ footer {
         font-weight: 300;
         color: $heading;
         margin: 0 0 15px 0;
+        text-align: center;
     }
 
     p {
         color: $text;
         margin: 0 0 15px 0;
         font-size: 0.9em;
+        text-align: center;
+    }
+    a{
+      text-align: center;
     }
 }
 
@@ -737,6 +755,9 @@ footer {
         margin: 0 0 15px 0;
         color: #fff;
         font-weight: 500;
+    }
+    a {
+      color: #374054;
     }
 }
 
@@ -853,11 +874,11 @@ footer {
 
     .vtimeline-date {
         width: auto;
-        text-align: left;
+        text-align: right;
         position: relative;
         margin-bottom: 15px;
         display: block;
-        margin-left: 70px;
+        margin-left: 80px;
     }
 
     .vtimeline-icon {
